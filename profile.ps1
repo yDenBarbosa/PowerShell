@@ -1,6 +1,6 @@
 $PROFILE
 
-Get-Help New-Item
+# Get-Help New-Item
 
-New-Item $PROFILE
+# New-Item $PROFILE
 
