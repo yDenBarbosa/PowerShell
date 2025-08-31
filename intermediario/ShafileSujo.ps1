@@ -1,17 +1,5 @@
 function Get-FileSHA1($filePath) {
 
-    begin {
-
-    }
-
-    process {
-
-    }
-
-    end {
-        
-    }
-
     if ($filePath -ne $null) {
         $fileContent = Get-Content $filePath
         $fileBytes = [System.Text.Encoding]::UTF8.GetBytes($fileContent)
