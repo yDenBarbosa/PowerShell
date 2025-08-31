@@ -17,10 +17,10 @@ function Get-FileSHA1($filePath){
     $prettyHashSB.ToString()
 }
 
-$arquivo = "C:\Users\denis\Desktop\PowerShell\intermediario\Shafile.ps1"
-$hashDoArquivo = Get-FileSHA1 $arquivo 
+# $arquivo = "C:\Users\denis\Desktop\PowerShell\intermediario\Shafile.ps1"
+# $hashDoArquivo = Get-FileSHA1 $arquivo 
  
-Write-Host "O hash do arquivo $arquivo eh $hashDoArquivo" -BackgroundColor Red -ForegroundColor Yellow
+# Write-Host "O hash do arquivo $arquivo eh $hashDoArquivo" -BackgroundColor Red -ForegroundColor Yellow
 
 function Get-FileSHA256 (){
 
