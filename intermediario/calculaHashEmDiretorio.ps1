@@ -12,6 +12,8 @@ foreach ($item in $arquivos.FullName ) {
     Write-Host "O hash do aequivo $item é $hashItem"
 }
 
+#(gci -File).FullName | Get-FileSHA1
+
 # # Define um parâmetro chamado $diretorio, que será passado ao script
 # param($diretorio)
 

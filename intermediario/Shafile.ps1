@@ -1,20 +1,46 @@
-function Get-FileSHA1($filePath){
-    $fileContent = Get-Content $filePath
-    $fileBytes = [System.Text.Encoding]::UTF8.GetBytes($fileContent)
+function Get-FileSHA1($filePath) {
 
-    $sha1 = New-Object System.Security.Cryptography.SHA1Managed
-
-    $hash = $sha1.ComputeHash($fileBytes)
+    if ($filePath -ne $null) {
+        $fileContent = Get-Content $filePath
+        $fileBytes = [System.Text.Encoding]::UTF8.GetBytes($fileContent)
     
-    $prettyHashSB = New-Object System.Text.StringBuilder
-
-    foreach ($byte in $hash) {
-        $hexaNotation = $byte.ToString("X2")
-        # $prettyHashSB.Append($hexaNotation) | Out-Null
-        $prettyHashSB.Append($hexaNotation) > $null
+        $sha1 = New-Object System.Security.Cryptography.SHA1Managed
+    
+        $hash = $sha1.ComputeHash($fileBytes)
+        
+        $prettyHashSB = New-Object System.Text.StringBuilder
+    
+        foreach ($byte in $hash) {
+            $hexaNotation = $byte.ToString("X2")
+            # $prettyHashSB.Append($hexaNotation) | Out-Null
+            $prettyHashSB.Append($hexaNotation) > $null
+        }
+    
+        $prettyHashSB.ToString()
+    }
+    else {
+        foreach ($item in $input) {
+            $fileContent = Get-Content $item
+            $fileBytes = [System.Text.Encoding]::UTF8.GetBytes($fileContent)
+        
+            $sha1 = New-Object System.Security.Cryptography.SHA1Managed
+        
+            $hash = $sha1.ComputeHash($fileBytes)
+            
+            $prettyHashSB = New-Object System.Text.StringBuilder
+        
+            foreach ($byte in $hash) {
+                $hexaNotation = $byte.ToString("X2")
+                # $prettyHashSB.Append($hexaNotation) | Out-Null
+                $prettyHashSB.Append($hexaNotation) > $null
+            }
+        
+            $prettyHashSB.ToString()
+        }
+        
     }
 
-    $prettyHashSB.ToString()
+
 }
 
 # function Get-FileSHA1($filePath){
@@ -55,12 +81,12 @@ function Get-FileSHA1($filePath){
  
 # Write-Host "O hash do arquivo $arquivo eh $hashDoArquivo" -BackgroundColor Red -ForegroundColor Yellow
 
-function Get-FileSHA256 (){
+function Get-FileSHA256 () {
 
 }
-function Get-FileSHA384 (){
+function Get-FileSHA384 () {
 
 }
-function Get-FileSHA512 (){
+function Get-FileSHA512 () {
 
 }
