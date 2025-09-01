@@ -2,7 +2,7 @@ param($diretorio)
 
 $ErrorActionPreference = "Stop"
 
-.\Shafile.ps1
+. .\Shafile.ps1
 
 $arquivos = Get-ChildItem $diretorio -File
 #foreach ($item in $arquivos | Select-Object FullName) {

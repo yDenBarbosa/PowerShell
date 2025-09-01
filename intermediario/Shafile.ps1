@@ -1,27 +1,25 @@
-function Get-FileSHA1($filePath) {
+function Get-FileSHA1 {
+
+    param(
+        [Parameter(
+            ValueFromPipeline = $true,
+            ValueFromPipelineByPropertyName = "FullName",
+            Mandatory = $true
+        )]
+        [string] $filePath
+    )
 
     begin {
-
+        $sha1 = New-Object System.Security.Cryptography.SHA1Managed
+        $prettyHashSB = New-Object System.Text.StringBuilder
     }
 
     process {
-
-    }
-
-    end {
-        
-    }
-
-    if ($filePath -ne $null) {
         $fileContent = Get-Content $filePath
         $fileBytes = [System.Text.Encoding]::UTF8.GetBytes($fileContent)
     
-        $sha1 = New-Object System.Security.Cryptography.SHA1Managed
-    
         $hash = $sha1.ComputeHash($fileBytes)
         
-        $prettyHashSB = New-Object System.Text.StringBuilder
-    
         foreach ($byte in $hash) {
             $hexaNotation = $byte.ToString("X2")
             # $prettyHashSB.Append($hexaNotation) | Out-Null
@@ -29,29 +27,12 @@ function Get-FileSHA1($filePath) {
         }
     
         $prettyHashSB.ToString()
-    }
-    else {
-        foreach ($item in $input) {
-            $fileContent = Get-Content $item
-            $fileBytes = [System.Text.Encoding]::UTF8.GetBytes($fileContent)
-        
-            $sha1 = New-Object System.Security.Cryptography.SHA1Managed
-        
-            $hash = $sha1.ComputeHash($fileBytes)
-            
-            $prettyHashSB = New-Object System.Text.StringBuilder
-        
-            foreach ($byte in $hash) {
-                $hexaNotation = $byte.ToString("X2")
-                # $prettyHashSB.Append($hexaNotation) | Out-Null
-                $prettyHashSB.Append($hexaNotation) > $null
-            }
-        
-            $prettyHashSB.ToString()
-        }
-        
+        $prettyHashSB.Clear() > $null
     }
 
+    end {
+        $sha1.Dispose()
+    }
 
 }
 
